@@ -19,6 +19,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     return ipcRenderer.invoke(channel, ...omit)
   },
 
-  // You can expose other APTs you need here.
-  // ...
+  // Add a method to close the window
+  closeCurrentWindow() {
+    ipcRenderer.send('close-current-window');
+  }
 })

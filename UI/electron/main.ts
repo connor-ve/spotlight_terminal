@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain  } from 'electron'
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
@@ -28,7 +28,10 @@ let win: BrowserWindow | null
 
 function createWindow() {
   win = new BrowserWindow({
-    icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
+    width: 600, // Set the width you prefer
+    height: 150,
+    transparent: true,
+    frame: false, // Creates a frameless window
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),
     },
@@ -64,5 +67,11 @@ app.on('activate', () => {
     createWindow()
   }
 })
+
+ipcMain.on('close-current-window', () => {
+  if (win) {
+    win.close();
+  }
+});
 
 app.whenReady().then(createWindow)
