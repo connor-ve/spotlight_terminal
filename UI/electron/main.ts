@@ -30,7 +30,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 600, // Set the width you prefer
     height: 150,
-    transparent: true,
+    modal: true, 
     frame: false, // Creates a frameless window
     webPreferences: {
       preload: path.join(__dirname, 'preload.mjs'),

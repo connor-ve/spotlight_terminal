@@ -1,18 +1,18 @@
 <script setup>
 import { ref } from 'vue';
-import axios from 'axios';  
+import axios from 'axios';
 
 const command = ref('');
 
 function handleCommand() {
   if (command.value.trim()) {
     sendCommandToAPI(command.value);
-    command.value = ''; 
+    command.value = '';
   }
 }
 
 async function sendCommandToAPI(cmd) {
-  const apiURL = 'https://your-api-endpoint.com/command'; 
+  const apiURL = 'https://your-api-endpoint.com/command';
   try {
     const response = await axios.post(apiURL, { command: cmd });
     console.log('API Response:', response.data);
@@ -47,12 +47,12 @@ onUnmounted(() => {
 #app {
   width: 100%;
   height: 100%;
-  margin: 0;
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #333;
+  -webkit-app-region: drag;
+  /* Make the app area draggable */
 }
 
 #command-bar {
@@ -62,25 +62,6 @@ onUnmounted(() => {
   background: #222;
   border: none;
   outline: none;
-  box-sizing: border-box;
-}
-
-
-
-body {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: red 1px solid;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-
+  -webkit-app-region: no-drag;
 }
 </style>

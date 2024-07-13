@@ -20,6 +20,8 @@ func main() {
 func runCommand(c echo.Context) error {
 	// User ID from path `users/:id`
 	id := c.Param("run")
-	strings.Split(id, "")
+	cmdList := strings.Split(id, "")
+	cmd := exec.Command(cmdList)
+	
 	return c.String(http.StatusOK, id)
 }
